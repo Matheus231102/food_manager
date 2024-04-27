@@ -1,63 +1,91 @@
 package matheus.github.manager.model;
 
 import lombok.*;
+import matheus.github.manager.enums.NutrientNameEnum;
+import matheus.github.manager.interfaces.FoodInterface;
 
 @Getter
 @Setter
 @ToString
-public class Food {
+public class Food implements FoodInterface {
 
      private int id;
 
      private String name;
 
-     private int calorie;
+     private int foodCalorie;
 
-     private int protein;
+     private int foodProtein;
 
-     private int fat;
+     private int foodFat;
 
-     private int carbohydrate;
+     private int foodCarbohydrate;
 
-     private double price;
+     private double foodPrice;
 
-     public static Food Builder() {
+     public static Food create() {
           return new Food();
      }
 
      public Food id(Integer id) {
-          this.id = id;
+          setId(id);
           return this;
      }
 
      public Food name(String name) {
-          this.name = name;
+          setName(name);
           return this;
      }
 
      public Food calorie(int calorie) {
-          this.calorie = calorie;
+          setFoodCalorie(calorie);
           return this;
      }
 
      public Food protein(int protein) {
-          this.protein = protein;
+          setFoodProtein(protein);
           return this;
      }
 
      public Food fat(int fat) {
-          this.fat = fat;
+          setFoodFat(fat);
           return this;
      }
 
      public Food carbohydrate(int carbohydrate) {
-          this.carbohydrate = carbohydrate;
+          setFoodCarbohydrate(carbohydrate);
           return this;
      }
 
      public Food price(double price) {
-          this.price = price;
+          setFoodPrice(price);
           return this;
      }
 
+     public void seeFood() {
+          System.out.println("Name: " + getName());
+          System.out.println("Calories: " + getFoodCalorie());
+          System.out.println("Proteins: " + getFoodProtein());
+          System.out.println("Carbohydrates: " + getFoodCarbohydrate());
+          System.out.println("Fats: " + getFoodFat());
+          System.out.println("Price: " + getFoodPrice());
+     }
+
+     @Override
+     public int getNutrientValueByName(NutrientNameEnum nutrientName) {
+          switch (nutrientName) {
+               case FAT -> {
+                    return getFoodFat();
+               }
+               case PROTEIN -> {
+                    return getFoodProtein();
+               }
+               case CARBOHYDRATE -> {
+                    return getFoodCarbohydrate();
+               }
+               default -> {
+                    return 0;
+               }
+          }
+	}
 }
